@@ -1,0 +1,1525 @@
+<?php
+
+/**
+ * Implementation of hook_ctools_plugin_api().
+ */
+function jumpjet_image_engine_ctools_plugin_api() {
+  list($module, $api) = func_get_args();
+  if ($module == "strongarm" && $api == "strongarm") {
+    return array("version" => 1);
+  }
+}
+
+/**
+ * Implementation of hook_imagecache_default_presets().
+ */
+function jumpjet_image_engine_imagecache_default_presets() {
+  $items = array(
+    'jumpjet_img_01col' => array(
+      'presetname' => 'jumpjet_img_01col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '40',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_01col_1-1-square' => array(
+      'presetname' => 'jumpjet_img_01col_1-1-square',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '40',
+            'height' => '40',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 0,
+            'aspect' => 1,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '40',
+            'height' => '40',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_01col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_01col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '40',
+            'height' => '53',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '40',
+            'height' => '53',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_01col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_01col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '40',
+            'height' => '30',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '40',
+            'height' => '30',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_02col' => array(
+      'presetname' => 'jumpjet_img_02col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '100',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_02col_1-1-square' => array(
+      'presetname' => 'jumpjet_img_02col_1-1-square',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '100',
+            'height' => '100',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '0',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '100',
+            'height' => '100',
+            'upscale' => 1,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_02col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_02col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '100',
+            'height' => '133',
+            'upscale' => 0,
+          ),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '2' => array(
+          'weight' => '0',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '100',
+            'height' => '133',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_02col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_02col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '100',
+            'height' => '75',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '100',
+            'height' => '75',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_03col' => array(
+      'presetname' => 'jumpjet_img_03col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '160',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_03col_1-1-square' => array(
+      'presetname' => 'jumpjet_img_03col_1-1-square',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '160',
+            'height' => '160',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '0',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '160',
+            'height' => '160',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_03col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_03col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '160',
+            'height' => '90',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '160',
+            'height' => '90',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_03col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_03col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '160',
+            'height' => '213',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '160',
+            'height' => '213',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_03col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_03col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '160',
+            'height' => '120',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '160',
+            'height' => '120',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_04col' => array(
+      'presetname' => 'jumpjet_img_04col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '220',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_04col_1-1-square' => array(
+      'presetname' => 'jumpjet_img_04col_1-1-square',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '220',
+            'height' => '220',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '0',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '220',
+            'height' => '220',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_04col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_04col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '220',
+            'height' => '123',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '220',
+            'height' => '123',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_04col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_04col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '220',
+            'height' => '293',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '220',
+            'height' => '293',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_04col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_04col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '220',
+            'height' => '165',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '220',
+            'height' => '165',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_05col' => array(
+      'presetname' => 'jumpjet_img_05col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '280',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_05col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_05col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '220',
+            'height' => '157',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '220',
+            'height' => '157',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_05col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_05col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '280',
+            'height' => '373',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '280',
+            'height' => '373',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_05col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_05col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '280',
+            'height' => '210',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '280',
+            'height' => '210',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_06col' => array(
+      'presetname' => 'jumpjet_img_06col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '340',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_06col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_06col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '340',
+            'height' => '191',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '340',
+            'height' => '191',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_06col_3-4-portrait' => array(
+      'presetname' => 'jumpjet_img_06col_3-4-portrait',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '340',
+            'height' => '453',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 0.75,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '340',
+            'height' => '453',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_06col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_06col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '340',
+            'height' => '255',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '340',
+            'height' => '255',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_07col' => array(
+      'presetname' => 'jumpjet_img_07col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '400',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_07col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_07col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '400',
+            'height' => '225',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '400',
+            'height' => '225',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_07col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_07col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '400',
+            'height' => '300',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '400',
+            'height' => '300',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_08col' => array(
+      'presetname' => 'jumpjet_img_08col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '460',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_08col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_08col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '460',
+            'height' => '258',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '460',
+            'height' => '258',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_08col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_08col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '460',
+            'height' => '345',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '460',
+            'height' => '345',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_08col_banner' => array(
+      'presetname' => 'jumpjet_img_08col_banner',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '460',
+            'height' => '100',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 4.6,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '460',
+            'height' => '100',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_09col' => array(
+      'presetname' => 'jumpjet_img_09col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '520',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_09col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_09col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '520',
+            'height' => '292',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '520',
+            'height' => '292',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_09col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_09col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '520',
+            'height' => '390',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '520',
+            'height' => '390',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_10col' => array(
+      'presetname' => 'jumpjet_img_10col',
+      'actions' => array(
+        '0' => array(
+          'weight' => '0',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '0',
+          'module' => 'imagecache',
+          'action' => 'imagecache_scale',
+          'data' => array(
+            'width' => '580',
+            'height' => '',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_10col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_10col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '580',
+            'height' => '326',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '580',
+            'height' => '326',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_10col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_10col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '580',
+            'height' => '435',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '580',
+            'height' => '435',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_10col_banner' => array(
+      'presetname' => 'jumpjet_img_10col_banner',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '580',
+            'height' => '120',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 4.83,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '580',
+            'height' => '120',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_11col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_11col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '640',
+            'height' => '360',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '640',
+            'height' => '360',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_11col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_11col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '640',
+            'height' => '480',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '640',
+            'height' => '480',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_12col_16-9-landscape' => array(
+      'presetname' => 'jumpjet_img_12col_16-9-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '700',
+            'height' => '393',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.78,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '700',
+            'height' => '393',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_12col_4-3-landscape' => array(
+      'presetname' => 'jumpjet_img_12col_4-3-landscape',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '700',
+            'height' => '525',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 1.33,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '700',
+            'height' => '525',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_12col_banner' => array(
+      'presetname' => 'jumpjet_img_12col_banner',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '700',
+            'height' => '140',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 5,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '700',
+            'height' => '140',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_14col_banner' => array(
+      'presetname' => 'jumpjet_img_14col_banner',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '820',
+            'height' => '160',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 5.13,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '820',
+            'height' => '160',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+    'jumpjet_img_16col_banner' => array(
+      'presetname' => 'jumpjet_img_16col_banner',
+      'actions' => array(
+        '0' => array(
+          'weight' => '-10',
+          'module' => 'imagecache_autorotate',
+          'action' => 'imagecache_autorotate',
+          'data' => array(),
+        ),
+        '1' => array(
+          'weight' => '-9',
+          'module' => 'imagecrop',
+          'action' => 'imagecrop_javascript',
+          'data' => array(
+            'width' => '940',
+            'height' => '200',
+            'xoffset' => 'center',
+            'yoffset' => 'center',
+            'resizable' => 1,
+            'aspect' => 4.7,
+            'disable_if_no_data' => 1,
+          ),
+        ),
+        '2' => array(
+          'weight' => '-8',
+          'module' => 'smartcrop',
+          'action' => 'smartcrop_scale_and_crop',
+          'data' => array(
+            'width' => '940',
+            'height' => '200',
+            'upscale' => 0,
+          ),
+        ),
+      ),
+    ),
+  );
+  return $items;
+}
