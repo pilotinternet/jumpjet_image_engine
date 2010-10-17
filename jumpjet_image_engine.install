@@ -28,7 +28,7 @@ function jumpjet_image_engine_install() {
     
   // First we need to ensure imagecache is installed.  
   module_rebuild_cache();
-  $modules = array('imageapi', 'imageapi_gd', 'imagecache');
+  $modules = array('imageapi', 'imageapi_gd', 'imagecache', 'imagecache_autorotate', 'smartcrop', 'imagecrop');
   drupal_install_modules($modules);
 
   // Then we have the exported presets from imagecache
